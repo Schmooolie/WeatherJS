@@ -20,7 +20,7 @@
     </div>
     <br>
     <div class="content-container">
-        <h1 id="Gmessage"></h1><br>
+      <h1 id="Gmessage"></h1><br>
       <div class="App">
         <div class="content">
           <h2 id="title"></h2><br>
@@ -30,15 +30,27 @@
                 <tr>
                   <p id="term1"></p>
                   <p id="term"></p>
+                  <div id="forecastContainer">
+                    <div id="forecast1">
+                    </div>
+                    <div id="forecast2">
+                    </div>
+                    <div id="forecast3">
+                    </div>
+                  </div>
                 </tr>
               </th>
-              </table>
-              <div class="search">
-                  <input id="input" type="text" id="input" placeholder="Enter a City" /><br><br>
-                  <button id="btn1" class="btn tempBtn" onclick="set1(); getWeather();" id="button">Search</button>
-                  <p id="orUse" style="display:inline">or use</p>
-                  <button id="btn2" class="btn tempBtn" onclick="set2(); getWeather();" id="button">Current Location</button>
-                </div>
+            </table>
+            <div class="search">
+              <input id="input" type="text" id="input" placeholder="Enter a City" /><br><br>
+              <button id="btn1" class="btn tempBtn" onclick="set1(); getWeather();" id="button">Search</button>
+              <p id="orUse" style="display:inline">or use</p>
+              <button id="btn2" class="btn tempBtn" onclick="set2(); getWeather();" id="button">Current Location</button>
+            </div><br>
+            <div id="map">
+              <iframe id="mapData" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=52.520008,13.404954&hl=es;z=14&amp;output=embed">
+              </iframe>
+            </div><br>
           </div>
         </div>
       </div>
