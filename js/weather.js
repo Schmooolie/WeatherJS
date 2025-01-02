@@ -185,10 +185,10 @@ async function getWeather() {
     Promise.all([
         //fetch links
         $.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&lang=${language}`
         ),
         $.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${key}`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${key}&lang=${language}`
         )
       ])
       .then(fetchData)
@@ -199,10 +199,10 @@ async function getWeather() {
     Promise.all([
         //fetch links
         $.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}&lang=${language}`
         ),
         $.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${key}`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${key}&lang=${language}`
         )
       ])
       .then(fetchData);
@@ -242,12 +242,23 @@ function renderOutput(
   let forecast3 = document.getElementById("forecast3");
   let map = document.getElementById("map");
 
+  if (language === 'en') {
+    term.innerHTML = `<img src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Weather in ${city}"> ${celsius}°C`;
+    term1.innerHTML = `Humidity: ${humidity}% - Air Pressure: ${pressure} hPa <br> ${capitalizeFirst(description)}`;
+    forecast1.innerHTML = `<p class="forecastDay">in 24 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon1}.png" alt="Weather Icon">${forecastTemp1}°C</p><p class="forecastCondition">${forecastCondition1}</p>`;
+    forecast2.innerHTML = `<p class="forecastDay">in 48 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon2}.png" alt="Weather Icon">${forecastTemp2}°C</p><p class="forecastCondition">${forecastCondition2}</p>`;
+    forecast3.innerHTML = `<p class="forecastDay">in 72 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon3}.png" alt="Weather Icon">${forecastTemp3}°C</p><p class="forecastCondition">${forecastCondition3}</p>`;
+  } else if (language === 'de') {
+    term.innerHTML = `<img src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Wetter in ${city}"> ${celsius}°C`;
+    term1.innerHTML = `Luftfeuchtigkeit: ${humidity}% - Luftdruck: ${pressure} hPa <br> ${capitalizeFirst(description)}`;
+    forecast1.innerHTML = `<p class="forecastDay">in 24 Stunden:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon1}.png" alt="Weather Icon">${forecastTemp1}°C</p><p class="forecastCondition">${forecastCondition1}</p>`;
+    forecast2.innerHTML = `<p class="forecastDay">in 48 Stunden:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon2}.png" alt="Weather Icon">${forecastTemp2}°C</p><p class="forecastCondition">${forecastCondition2}</p>`;
+    forecast3.innerHTML = `<p class="forecastDay">in 72 Stunden:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon3}.png" alt="Weather Icon">${forecastTemp3}°C</p><p class="forecastCondition">${forecastCondition3}</p>`;
+  } else {
+    console.log('something went wrong')
+  }
+
   title.innerHTML = `${city}, ${country}`;
-  term.innerHTML = `<img src="https://openweathermap.org/img/w/${weatherIcon}.png" alt="Weather in ${city}"> ${celsius}°C`;
-  term1.innerHTML = `Humidity: ${humidity}% - Air Pressure: ${pressure} hPa <br> ${capitalizeFirst(description)}`;
-  forecast1.innerHTML = `<p class="forecastDay">in 24 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon1}.png" alt="Weather Icon">${forecastTemp1}°C</p><p class="forecastCondition">${forecastCondition1}</p>`;
-  forecast2.innerHTML = `<p class="forecastDay">in 48 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon2}.png" alt="Weather Icon">${forecastTemp2}°C</p><p class="forecastCondition">${forecastCondition2}</p>`;
-  forecast3.innerHTML = `<p class="forecastDay">in 72 h:</p><p class="forecastTemp"><img class="forecastImg" src="https://openweathermap.org/img/w/${forecastWeatherIcon3}.png" alt="Weather Icon">${forecastTemp3}°C</p><p class="forecastCondition">${forecastCondition3}</p>`;
   map.innerHTML = `<iframe id="mapData" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=${latMap},${lonMap}&hl=es;z=14&amp;output=embed"></iframe>`;
 
   bg(condition);
